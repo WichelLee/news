@@ -1,23 +1,40 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <headers></headers>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <slider></slider>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <!-- <h1 class="page-header">Dashboard</h1> -->
+          <router-view/>
+        </div>
+      </div>
+    </div>
+    
   </div>
 </template>
 
 <script>
+import headers from './components/common/header'
+import slider from './components/common/slider'
 export default {
-  name: 'App'
-}
+  components:{
+    headers,
+    slider
+  }
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+* {
+    margin: 0;
+    padding: 0;
 }
+html, body, #app {
+    height: 100%;
+}
+
 </style>
