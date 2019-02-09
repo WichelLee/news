@@ -49,9 +49,31 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert("submit!");
+          //   alert("submit!");
+          this.$http
+            .request({
+              url: "http://localhost:8888/api/private/v1/login",
+              method: "post",
+              data: {
+                username: this.ruleForm.name,
+                password: this.ruleForm.pass
+              }
+            })
+            .then(data => {
+              var { data, meta } = data;
+              if (meta.status == 200) {
+                this.$message({
+                  message: "登陆成功",
+                  type: "success"
+                });
+                this.$router.push('/mains');
+              }
+            });
         } else {
-          console.log("error submit!!");
+          this.$message({
+            message: "登陆失败",
+            type: "error"
+          });
           return false;
         }
       });
