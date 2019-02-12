@@ -52,7 +52,7 @@ export default {
           //   alert("submit!");
           this.$http
             .request({
-              url: "http://localhost:8888/api/private/v1/login",
+              url: "/login",
               method: "post",
               data: {
                 username: this.ruleForm.name,
