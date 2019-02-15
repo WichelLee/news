@@ -43,13 +43,13 @@ export default {
           { min: 3, max: 20, message: "长度在 3 到 20 个字符", trigger: "blur" }
         ]
       }
-    };
+    }
   },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          //   alert("submit!");
+          //   alert("submit!")
           this.$http
             .request({
               url: "/login",
@@ -60,29 +60,31 @@ export default {
               }
             })
             .then(data => {
-              var { data, meta } = data;
+              var { data, meta } = data
               if (meta.status == 200) {
+                console.log(data.token)
+                window.localStorage.setItem('token', data.token)
                 this.$message({
                   message: "登陆成功",
                   type: "success"
-                });
-                this.$router.push('/mains');
+                })
+                this.$router.push('/mains')
               }
-            });
+            })
         } else {
           this.$message({
             message: "登陆失败",
             type: "error"
-          });
-          return false;
+          })
+          return false
         }
-      });
+      })
     },
     resetForm(formName) {
-      this.$refs[formName].resetFields();
+      this.$refs[formName].resetFields()
     }
   }
-};
+}
 </script>
 
 <style>

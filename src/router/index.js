@@ -9,17 +9,32 @@ import newgoods from '../components/various/newgoods.vue'
 
 Vue.use(Router)
 
-export default new Router({
+var router = new Router({
   routes: [
     {name:'login',path:'/login',component:login},
     {name:'mains',path:'/mains',component:mains,
-                  children:[
-                    {name:'users',path:'/users',component:users},
-                    {name:'goods',path:'/goods',component:goods},
-                    {name:'maps',path:'/maps',component:maps},
-                    {name:'newgoods',path:'/newgoods',component:newgoods},
-                    
-                  ]},
-
+      children:[
+        {name:'users',path:'/users',component:users},
+        {name:'goods',path:'/goods',component:goods},
+        {name:'maps',path:'/maps',component:maps},
+        {name:'newgoods',path:'/newgoods',component:newgoods},
+        
+      ]},
   ]
 })
+router.beforeEach((to, from, next) => {
+  console.log(to);
+  console.log(from);
+  if (to.path != '/login') {
+    if (!localStorage['token']) {
+      this.message.error('请先登录');
+      this.$router.push('/login');
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+
+})
+export default router
